@@ -1,69 +1,44 @@
 #include<iostream>
-#include<string>
-#include<algorithm>
 #include<vector>
-#include<map>
-#include<cstdio>
+#include<algorithm>
 using namespace std;
-
-struct student{
-	string name;
-	int o,m,f,g;
-	student(string name="",int o=-1,int m=-1,int f=-1,int g=-1):name(name),o(o),m(m),f(f),g(g){
-	}
-	bool operator < (const student &a)const{
-		if(g==a.g)
-		{
-		return name>a.name;
-		}else return g<a.g;
-	}
-};
-
-int main(){
-	int a,b,c,o;
-	string n;
-	//freopen("E:\\cs2018\\PAT\\testcase\\1137.txt","r",stdin);
-	cin>>a>>b>>c;
-	vector<student> v;
-	map<string,student> mp;
-	while(a--)
+vector<long int> cpos,cnag,ppos,pnag;
+bool cmp(long int &A,long int &B)
+{
+	return A>B;
+ } 
+int main()
+{
+	int n;
+	cin>>n;
+	while(n--)
 	{
-		cin>>n;
-		cin>>o;
-		if(o>=200) mp[n]=student(n,o,-1,-1,-1);
-
+		long int tmp;
+		scanf("%ld",&tmp);
+		if(tmp>0) cpos.push_back(tmp);
+		else cnag.push_back(tmp);
 	}
-
-	while(b--)
-	{
-		cin>>n;
-		cin>>o;
-		if(mp.count(n)>0) mp[n].m=o;
-	}
-
-	while(c--)
-	{
-		cin>>n;
-		cin>>o;
-		if(mp.count(n)>0)
-		{
-			int m=mp[n].m;
-			mp[n].f=o;
-			
-			if(m>o)mp[n].g=m*0.4+o*0.6+0.5;
-			else mp[n].g=o;
-			if(mp[n].g>=60)v.push_back(mp[n]);
-			
-		}
-		
-
-	}
-	sort(v.begin(),v.end());
 	
-
-	for(int i=v.size()-1;i>=0;i--)
+	cin>>n;
+	while(n--)
 	{
-		cout<<v[i].name<<" "<<v[i].o<<" "<<v[i].m<<" "<<v[i].f<<" "<<v[i].g<<endl;
+		long int tmp;
+		scanf("%ld",&tmp);
+		if(tmp>0) ppos.push_back(tmp);
+		else pnag.push_back(tmp);
 	}
+	sort(cpos.begin(),cpos.end(),cmp);
+	sort(ppos.begin(),ppos.end(),cmp);
+	sort(cnag.begin(),cnag.end());
+	sort(pnag.begin(),pnag.end());
+	int m;
+	long int sum=0;
+	n=min(cpos.size(),ppos.size());
+	m=min(cnag.size(),pnag.size());
+	for(int i=0;i<n;i++)
+	sum+=cpos[i]*ppos[i];
+	for(int i=0;i<m;i++)
+	sum+=cnag[i]*pnag[i];
+	printf("%ld",sum);
 	
 }
