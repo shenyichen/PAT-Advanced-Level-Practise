@@ -73,7 +73,6 @@ int main()
 	out1+="*10^";
 	if(c1>0 &&n1!=0)
 	out1+="-";
-	out1+=n1+'0';
 	out2="0.";	
 	for(int i=0;i<n;i++)
 	{
@@ -85,13 +84,12 @@ int main()
 	out2+="*10^";
 	if(c2>0 &&n2!=0)
 	out2+="-";
-	out2+=n2+'0';
 	if(out1==out2)
 	{
 		cout<<"YES";
-	printf(" %s",out1.c_str());
+	printf(" %s%d",out1.c_str(),n1);
 	return 0;
 	}
 	else cout<<"NO";
-	printf(" %s %s",out1.c_str(),out2.c_str());
+	printf(" %s%d %s%d",out1.c_str(),n1,out2.c_str(),n2);
  } 
